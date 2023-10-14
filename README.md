@@ -1,7 +1,8 @@
 # CloneInstagram
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
-[Bootstrap] was used to style (https://getbootstrap.com/) version 5.3
+
+This project was used to style [Bootstrap](https://getbootstrap.com/) version 5.3.
 
 This project is being built to learn and pracite Angular.
 
