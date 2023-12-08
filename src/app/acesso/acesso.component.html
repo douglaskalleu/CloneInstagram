@@ -1,12 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6 d-flex justify-content-end">
+    <div class="col-sm-6 d-flex justify-content-end" [@banner-animation]="bannerState">
       <app-banner></app-banner>
     </div>
 
-    <div class="col-sm-6 d-flex justify-content-start">
-		  <app-login></app-login>
-      <!-- <app-cadastro></app-cadastro> -->
-    </div>  
+    <div class="col-sm-6 d-flex justify-content-start" [@panel-animation]="panelState">
+      <div *ngIf="register; else formLogin">
+        <app-cadastro (showPanel)="showPanel($event)"></app-cadastro>
+      </div>
+
+      <ng-template #formLogin>
+        <app-login (showPanel)="showPanel($event)"></app-login>
+      </ng-template>
+    </div>
+     
   </div>
 </div>
