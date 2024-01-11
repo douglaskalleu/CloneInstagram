@@ -3,9 +3,9 @@ import * as firebase from 'firebase/auth';
 import { getDatabase, ref, set} from "firebase/database";
 
 export class Auth{
-    public registerUser(user: User): void{
+    public registerUser(user: User): Promise<any>{
         const auth = firebase.getAuth();
-        firebase.createUserWithEmailAndPassword(auth, user.email, user.password!)
+        return firebase.createUserWithEmailAndPassword(auth, user.email, user.password!)
         .then((response: any) => {
 
             // Remove password
@@ -20,6 +20,18 @@ export class Auth{
         .catch((error) => {
             console.log('error: ', error);
         });
+    }
+
+    public AuthOnInstagram(email: string, password: string): void{
+       const auth = firebase.getAuth();
+       firebase.signInWithEmailAndPassword(auth, email, password)
+       .then((response: any) => 
+        console.log(response)
+        )
+       .catch((error: Error) =>
+        console.log('Wrong: ', error)
+       )
+       
     }
 }
 
