@@ -1,0 +1,9 @@
+export const USER_NOT_FOUND = "Usuário não encontrado";
+export const EMAIL_ALREADY_EXIST = "E-mail cadastrado já existe";
+export const INTERNAL_ERROR = "Erro no servidor, tente novamente mais tarde";
+export const INVALID_CREDENTIAL = "Credencial inválida, verifique usuário e senha e tente novamente";
+export const INVALID_EMAIL_FORMAT = "E-mail informado inválido";
+export const INVALID_PASSWORD_FORMAT = "Senha informada inválida";
+export const DEFAULT_MESSAGE = "Erro interno no servidor, tente novamente mais tarde";
+export const MISSING_EMAIL = 'E-mail não informado';
+export const MISSING_PASSWORD = "Senha não informada";

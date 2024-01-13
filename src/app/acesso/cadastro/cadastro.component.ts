@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { User } from '../user.model';
 import { Auth } from '../../auth.service';
+import { getErrorMessages } from '../getErrorMenssages';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,6 +12,8 @@ import { Auth } from '../../auth.service';
 export class CadastroComponent implements OnInit {
 
   @Output() public showPanel: EventEmitter<string> = new EventEmitter<string>();
+
+  public message: string | undefined;
 
   public form: FormGroup = new FormGroup({
     'email': new FormControl(null),
@@ -39,6 +42,10 @@ export class CadastroComponent implements OnInit {
     );
 
     this.auth.registerUser(user)
-    .then(() => this.showLogin());
+    .then(() => this.showLogin())
+    .catch((error) => {
+      this.message = getErrorMessages(error.code);
+      console.error("DECODE ERROR MESSAGE: " + JSON.stringify(error));
+  });
   }
 }

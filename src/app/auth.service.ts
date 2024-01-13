@@ -4,15 +4,17 @@ import { User } from "./acesso/user.model";
 import { getDatabase, ref, set} from "firebase/database";
 import * as firebase from 'firebase/auth';
 
+
 @Injectable()
 export class Auth{
     public tokenId: string | undefined;
+    private auth = firebase.getAuth();
+    private codError: string = '';
 
     constructor(private routes: Router){ }
 
     public registerUser(user: User): Promise<any>{
-        const auth = firebase.getAuth();
-        return firebase.createUserWithEmailAndPassword(auth, user.email, user.password!)
+        return firebase.createUserWithEmailAndPassword(this.auth, user.email, user.password!)
         .then((response: any) => {
 
             // Remove password
@@ -25,28 +27,51 @@ export class Auth{
               });
         })
         .catch((error) => {
-            console.log('error: ', error);
+            this.codError = error.code;
+            console.error("DECODE ERROR MESSAGE: " + JSON.stringify(error));
         });
     }
 
-    public AuthOnInstagram(email: string, password: string): void{
-       const auth = firebase.getAuth();
-       firebase.signInWithEmailAndPassword(auth, email, password)
+    public AuthOnInstagram(email: string, password: string): string{
+       firebase.signInWithEmailAndPassword(this.auth, email, password)
        .then((response: any) => 
-            auth.currentUser?.getIdToken()
+            this.auth.currentUser?.getIdToken()
                 .then((idToken: string) => {
                     this.tokenId = idToken;
+                    localStorage.setItem('idToken', idToken);
                     this.routes.navigate(['/home']);
                 })
         )
-       .catch((error: Error) =>
-            console.log('Wrong: ', error)
-       )
+       .catch((error) => {
+            this.codError = error.code;
+            console.error("DECODE ERROR MESSAGE: " + JSON.stringify(error));
+        })
        
+        return this.codError;
     }
 
     public authenticated(): boolean{
+        let currentToken = localStorage.getItem('idToken')
+
+        if(this.tokenId === undefined && currentToken != null){
+            this.tokenId = currentToken;
+        }
+
+        if(this.tokenId === undefined){
+            this.routes.navigate(['/']);
+        }
+
         return this.tokenId !== undefined;
     }
+
+    public logoff(): void{
+        
+        firebase.signOut(this.auth)
+        .then(()=> {
+            localStorage.removeItem('idToken');
+            this.tokenId = undefined;
+            this.routes.navigate(['/']);
+        });
+      }
 }
 

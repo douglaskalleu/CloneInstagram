@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Auth } from '../../auth.service';
+import { getErrorMessages } from '../getErrorMenssages';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,8 @@ import { Auth } from '../../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  public message: string | undefined;
 
   @Output() public showPanel: EventEmitter<string> = new EventEmitter<string>();
 
@@ -28,7 +31,11 @@ export class LoginComponent implements OnInit {
   }
 
   public AuthOnInstagram(): void{
-   this.auth.AuthOnInstagram(this.form.value.email, this.form.value.password);
+    this.message = '';
+   let response = this.auth.AuthOnInstagram(this.form.value.email, this.form.value.password);
+
+   
+   this.message = getErrorMessages(response);
   }
 
 }
