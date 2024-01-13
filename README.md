@@ -2,10 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
 
-This project was used to style [Bootstrap](https://getbootstrap.com/) version 5.3.</br>
-Also used SDK of firebase by google to save user data [FireBase](firebase.google.com) LTS Version.</br>
-This project use ReactiveForms.</br>
-RouterGuard with CanActivateFn
+This project uses to style [Bootstrap](https://getbootstrap.com/) version 5.3.</br>
+Also use SDK of firebase by google to save user data [FireBase](firebase.google.com) LTS Version.</br>
+This project uses ReactiveForms.</br>
+RouterGuard with CanActivateFn.</br>
+This project uses LocalStorage to store token auth
 
 This project is being built to learn and pracite Angular.
 
