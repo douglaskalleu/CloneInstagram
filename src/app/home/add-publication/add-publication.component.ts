@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-include-template',
-  templateUrl: './include-template.component.html',
-  styleUrls: ['./include-template.component.css']
+  selector: 'app-add-publication',
+  templateUrl: './add-publication.component.html',
+  styleUrls: ['./add-publication.component.css']
 })
-export class IncludeTemplateComponent {
+export class AddPublicationComponent {
   public form: FormGroup = new FormGroup({
     'title': new FormControl(null)
   })

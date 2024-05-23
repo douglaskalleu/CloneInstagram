@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
     this.message = '';
    let response = this.auth.AuthOnInstagram(this.form.value.email, this.form.value.password);
 
-   
-   this.message = getErrorMessages(response);
+   if(response !== '')
+    this.message = getErrorMessages(response);
   }
-
 }

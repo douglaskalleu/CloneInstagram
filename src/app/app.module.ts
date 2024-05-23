@@ -13,7 +13,7 @@ import { LoginComponent } from './acesso/login/login.component';
 import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { PublicationComponent } from './home/publication/publication.component';
-import { IncludeTemplateComponent } from './home/include-template/include-template.component';
+import { AddPublicationComponent } from './home/add-publication/add-publication.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { IncludeTemplateComponent } from './home/include-template/include-templa
     CadastroComponent,
     HomeComponent,
     PublicationComponent,
-    IncludeTemplateComponent
+    AddPublicationComponent
   ],
   imports: [
     BrowserModule,

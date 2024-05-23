@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IncludeTemplateComponent } from './include-template.component';
+import { AddPublicationComponent } from './add-publication.component';
 
 describe('IncludeTemplateComponent', () => {
-  let component: IncludeTemplateComponent;
-  let fixture: ComponentFixture<IncludeTemplateComponent>;
+  let component: AddPublicationComponent;
+  let fixture: ComponentFixture<AddPublicationComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [IncludeTemplateComponent]
+      declarations: [AddPublicationComponent]
     });
-    fixture = TestBed.createComponent(IncludeTemplateComponent);
+    fixture = TestBed.createComponent(AddPublicationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
