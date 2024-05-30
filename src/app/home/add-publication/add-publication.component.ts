@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import * as firebase from "firebase/auth";
+import { Subject, interval, takeUntil } from 'rxjs';
 import { Bd } from 'src/app/bdServices/bd.service';
+import { Progress } from 'src/app/progress.service';
+import { PublishModel } from 'src/app/ultils/publishModel';
+import * as firebase from "firebase/auth";
 
 @Component({
   selector: 'app-add-publication',
@@ -11,10 +14,12 @@ import { Bd } from 'src/app/bdServices/bd.service';
 export class AddPublicationComponent {
 
   constructor(
-    private bd: Bd
+    private bd: Bd,
+    private progress: Progress
   ){ }
 
   public email: string | undefined;
+  private image: any;
 
   public form: FormGroup = new FormGroup({
     'title': new FormControl(null)
@@ -27,13 +32,34 @@ export class AddPublicationComponent {
   }
 
   public publish(): void{
-    this.bd.publish({
-      email: this.email,
-      title: this.form.value.title
+    this.bd.publish(this.mountPublishData());
+
+    let followUpload = interval(1500);
+    let keepWay = new Subject();
+    keepWay.next(true);
+
+    followUpload
+    .pipe(takeUntil(keepWay))
+    .subscribe(() => {
+      console.log(this.progress.state);
+      console.log(this.progress.status);
+
+      if(this.progress.status === 'finished') {
+        keepWay.next(false);
+      }
     });
   }
 
   public prepareUploadImage(event: Event): void{
-    console.log((<HTMLInputElement>event.target).files);
+    this.image = (<HTMLInputElement>event.target).files;
+  }
+
+  private mountPublishData(): PublishModel{
+    const publishData = new PublishModel();
+    publishData.email = this.email;
+    publishData.title = this.form.value.title;
+    publishData.image = this.image[0];
+
+    return publishData;
   }
 }
