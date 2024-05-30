@@ -14,6 +14,7 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { PublicationComponent } from './home/publication/publication.component';
 import { AddPublicationComponent } from './home/add-publication/add-publication.component';
+import { Bd } from './bdServices/bd.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AddPublicationComponent } from './home/add-publication/add-publication.
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth],
+  providers: [Auth, Bd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

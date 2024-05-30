@@ -7,6 +7,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <input 
+                        type="file"
+                        class="form-control"
+                        accept="image/*"
+                        (change)="prepareUploadImage($event)"
+                    />
                     <input type="text" placeholder="Titulo da publicação" class="form-control" formControlName="title"/>
                 </div>
                 <div class="modal-footer">
