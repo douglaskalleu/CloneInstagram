@@ -6,20 +6,19 @@ export class FireStorage{
     constructor(private progress: Progress){}
 
     public postStorage(publish: PublishModel): void{
-        let imageName = Date.now();
         const storage = getStorage();
-        const storageRef = ref(storage, `images/${imageName}`);
+        const storageRef = ref(storage, `images/${publish.imageName}`);
         const uploadTask = uploadBytesResumable(storageRef, publish.image);
 
         uploadTask.on("state_changed", (snapshot) =>{
-            this.progress.status = "running";
+            this.progress.status = "Running";
             this.progress.state = snapshot;
         },
         (error) =>{
-            this.progress.status = "error";
+            this.progress.status = "Error";
         },
         () => {
-            this.progress.status = "finished";
+            this.progress.status = "Finished";
         });
     }
 }

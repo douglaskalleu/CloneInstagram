@@ -18,7 +18,9 @@ export class AddPublicationComponent {
     private progress: Progress
   ){ }
 
-  public email: string | undefined;
+  public email: string = '';
+  public publishProgress: string = 'Pending';
+  public uploadPercent: number | undefined;
   private image: any;
 
   public form: FormGroup = new FormGroup({
@@ -43,8 +45,11 @@ export class AddPublicationComponent {
     .subscribe(() => {
       console.log(this.progress.state);
       console.log(this.progress.status);
+      this.publishProgress = 'Running';
+      this.uploadPercent = Math.round((this.progress.state.bytesTransferred / this.progress.state.totalBytes) * 100);
 
-      if(this.progress.status === 'finished') {
+      if(this.progress.status === 'Finished') {
+        this.publishProgress = this.progress.status;
         keepWay.next(false);
       }
     });
@@ -52,6 +57,11 @@ export class AddPublicationComponent {
 
   public prepareUploadImage(event: Event): void{
     this.image = (<HTMLInputElement>event.target).files;
+  }
+
+  public closeModal():void{
+    this.publishProgress = 'Pending';
+    this.uploadPercent = 0;
   }
 
   private mountPublishData(): PublishModel{

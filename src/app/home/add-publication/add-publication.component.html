@@ -1,10 +1,10 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" *ngIf="publishProgress === 'Pending'">
             <form [formGroup]="form" (ngSubmit)="publish()">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Criar uma publicação</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
                 </div>
                 <div class="modal-body">
                     <input 
@@ -20,6 +20,26 @@
                     <button type="submit" class="btn btn-primary">Publicar</button>
                 </div>
             </form>
+        </div>
+
+        <div class="modal-content" *ngIf="publishProgress === 'Running'">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Publicação em andamento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+               Progresso:  {{ uploadPercent }}%
+            </div>
+        </div>
+
+        <div class="modal-content" *ngIf="publishProgress === 'Finished'">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Publicação realizada</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                Sua publicação foi realizada com sucesso!
+            </div>
         </div>
     </div>
 </div>
