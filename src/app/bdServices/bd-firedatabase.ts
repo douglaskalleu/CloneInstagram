@@ -19,6 +19,14 @@ export class FireDataBase{
         // set(ref(bd, `publish/${btoa(publish.email)}`), {title: publish.title});
     }
 
+    public getPublish(email: string): any{
+        let refDb = firebase.ref(getDatabase());
+        firebase.get(firebase.child(refDb, `publish/${btoa(email)}`))
+        .then((snapShot) => {
+            console.log(snapShot.val());
+        })
+    }
+
     private postImage(publish: PublishModel, storage: FireStorage):void {
         storage.postStorage(publish);
     }

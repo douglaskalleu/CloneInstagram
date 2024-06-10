@@ -4,7 +4,6 @@ import { Subject, interval, takeUntil } from 'rxjs';
 import { Bd } from 'src/app/bdServices/bd.service';
 import { Progress } from 'src/app/progress.service';
 import { PublishModel } from 'src/app/ultils/publishModel';
-import * as firebase from "firebase/auth";
 
 @Component({
   selector: 'app-add-publication',
@@ -28,9 +27,7 @@ export class AddPublicationComponent {
   })
 
   ngOnInit(){
-    firebase.getAuth().onAuthStateChanged((user) => {
-      this.email = user?.email!;
-    });
+    this.email = this.bd.getUserEmail();
   }
 
   public publish(): void{
