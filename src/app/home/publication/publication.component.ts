@@ -11,11 +11,6 @@ export class PublicationComponent {
   constructor(private bd: Bd){ }
 
   ngOnInit(){
-    this.email = this.bd.getUserEmail();
-    this.refreshTimeLine();
-  }
-
-  public refreshTimeLine(): void{
-    this.bd.getPublish(this.email);
+    this.bd.getPublish();
   }
 }

@@ -26,9 +26,7 @@ export class AddPublicationComponent {
     'title': new FormControl(null)
   })
 
-  ngOnInit(){
-    this.email = this.bd.getUserEmail();
-  }
+  ngOnInit(){  }
 
   public publish(): void{
     this.bd.publish(this.mountPublishData());

@@ -2,10 +2,13 @@ import { Injectable } from "@angular/core";
 import { PublishModel } from "../ultils/publishModel";
 import { FireDataBase } from "./bd-firedatabase";
 import { Progress } from "../progress.service";
-import * as firebase from 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
 
 @Injectable()
 export class Bd {
+
+    public currentUser!: any;
     constructor(
         private progress: Progress,
     ){}
@@ -13,18 +16,22 @@ export class Bd {
     public fire :FireDataBase = new FireDataBase();
 
     public publish(publish: PublishModel):void {
-        this.fire.sedToDataBase(publish, this.progress);
+        this.getUserToPost(publish);
     }
 
-    public getUserEmail(): string{
-        let email: string = ''
-        firebase.getAuth().onAuthStateChanged((user) => {
-            email = user?.email!;
+    //TODO Melhor o retorno do email do usuario logado
+    public getPublish(): any{
+        firebase.auth().onAuthStateChanged((user) => {
+            this.fire.getPublish(user?.email!);
+        });
+        
+    }
+
+    //TODO Melhor o retorno do email do usuario logado
+    public getUserToPost(publish: PublishModel): void{
+        firebase.auth().onAuthStateChanged((user) => {
+            publish.email = user?.email!;
+            this.fire.sedToDataBase(publish, this.progress);
           });
-          return email;
-    }
-
-    public getPublish(email: string): any{
-        this.fire.getPublish(email);
     }
 }
