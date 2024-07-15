@@ -8,6 +8,7 @@ import { Bd } from '../../bdServices/bd.service';
 export class PublicationComponent {
 
   public email: string = '';
+  public publications: any;
   constructor(private bd: Bd){ }
 
   ngOnInit(){

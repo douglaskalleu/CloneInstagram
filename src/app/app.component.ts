@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
 import firebase from 'firebase/compat/app';
 
 @Component({

@@ -5,7 +5,16 @@
       <div class="add-post" data-bs-toggle="modal" data-bs-target="#exampleModal"></div>
       <a href="#" (click)="logoff()" style="margin-left: 25px;">Sair</a>
     </div>
-  </div>  
+  </div>
+    <!-- <a (click)="changeTheme('light')">Light</a> 
+    <a (click)="changeTheme('dark')">Dark</a>  -->
+
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round" (click)="changeTheme(isDarkMode)"></span>
+      <i class="pi " [ngClass]="{'pi-moon': isDarkMode, 'pi-sun': !isDarkMode}"></i>
+    </label>
+      
 </nav>
 
 <br /><br /><br />

@@ -9,6 +9,7 @@ import "firebase/compat/auth";
 export class Bd {
 
     public currentUser!: any;
+    public publications: any;
     constructor(
         private progress: Progress,
     ){}
@@ -20,9 +21,12 @@ export class Bd {
     }
 
     //TODO Melhor o retorno do email do usuario logado
-    public getPublish(): any{
+    public getPublish(): void{
         firebase.auth().onAuthStateChanged((user) => {
-            this.fire.getPublish(user?.email!);
+            this.fire.getPublish(user?.email!)
+            .then((publish: any) => {
+                this.publications = publish
+            });
         });
         
     }

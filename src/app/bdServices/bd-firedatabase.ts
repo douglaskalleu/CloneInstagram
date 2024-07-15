@@ -18,34 +18,33 @@ export class FireDataBase {
             });
     }
 
-    public getPublish(email: string): any {
-        const storage: FireStorage = new FireStorage(this.progress);
-        firebase.database().ref(`publish/${btoa(email)}`)
+    public getPublish(email: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const storage: FireStorage = new FireStorage(this.progress);
+            firebase.database().ref(`publish/${btoa(email)}`)
             .once('value')
             .then((snapShot: any) => {
-
-                //let publications: Array<any>[];
-                // snapShot.forEach((childSnapShot: any) => {
-                //     let publish = childSnapShot.val();
-
-                //     firebase.storage().ref()
-                //     .child(`images/${childSnapShot.key}`)
-                //     .getDownloadURL()
-                //     .then((url: string) => {
-                //         publish.url_image = url;
-
-                //         firebase.database().ref(`detail_user/${btoa(email)}`)
-                //         .once('value')
-                //         .then((snapShot: any) => {
-                //             console.log(snapShot.val())
-                //         })
-                //     })
-                // })
-
                 snapShot.forEach((childSnapShot: any) => {
-                    storage?.getImagensPublished(childSnapShot, email)
+                    const storage = firebase.storage();
+                    let publications: Array<any> = [];
+                    let publish = childSnapShot.val();
+                    storage.ref()
+                        .child(`images/${childSnapShot.key}`)
+                        .getDownloadURL()
+                        .then((url: string) => {
+                            publish.image_url = url;
+                            firebase.database().ref(`detail_user/${btoa(email)}`)
+                            .once('value')
+                            .then((snapShot) =>{
+                                publish.user_name = snapShot.val().user.user_name
+                            })
+                            publications.push(publish);
+                        })
+                    resolve(publications)
                 })
             })
+
+        })
     }
 
     private postImage(publish: PublishModel, storage: FireStorage): void {
