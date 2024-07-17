@@ -1,4 +1,6 @@
-<nav class="navbar fixed-top navbar-light bg-white">
+<nav class="navbar fixed-top navbar-light "
+    [ngClass]="{'bg-dark': isDarkMode, 'bg-light': !isDarkMode}"
+>
   <div class="container">
     <div class="logo"></div>
     <div >
@@ -6,15 +8,7 @@
       <a href="#" (click)="logoff()" style="margin-left: 25px;">Sair</a>
     </div>
   </div>
-    <!-- <a (click)="changeTheme('light')">Light</a> 
-    <a (click)="changeTheme('dark')">Dark</a>  -->
-
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round" (click)="changeTheme(isDarkMode)"></span>
-      <i class="pi " [ngClass]="{'pi-moon': isDarkMode, 'pi-sun': !isDarkMode}"></i>
-    </label>
-      
+  <app-toggle-theme></app-toggle-theme>
 </nav>
 
 <br /><br /><br />

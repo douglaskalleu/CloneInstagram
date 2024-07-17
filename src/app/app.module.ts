@@ -16,6 +16,7 @@ import { PublicationComponent } from './home/publication/publication.component';
 import { AddPublicationComponent } from './home/add-publication/add-publication.component';
 import { Bd } from './bdServices/bd.service';
 import { Progress } from './progress.service';
+import { ToggleThemeComponent } from './toggle-theme/toggle-theme.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { Progress } from './progress.service';
     CadastroComponent,
     HomeComponent,
     PublicationComponent,
-    AddPublicationComponent
+    AddPublicationComponent,
+    ToggleThemeComponent
   ],
   imports: [
     BrowserModule,
