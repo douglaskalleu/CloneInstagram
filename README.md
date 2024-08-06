@@ -12,7 +12,7 @@ This project is being built to learn and pracite Angular.
 
 I decided to use animations to challenge myself and this project will be different from other Instagram clone projects.
 
-Hold on. New features is coming on this project...
+Swith theme - DarkMode / LightMode
 
 ## Development server
 

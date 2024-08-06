@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject, interval, takeUntil } from 'rxjs';
 import { Bd } from 'src/app/bdServices/bd.service';
@@ -16,6 +16,8 @@ export class AddPublicationComponent {
     private bd: Bd,
     private progress: Progress
   ){ }
+
+  @Output() public refreshTimeLine: EventEmitter<any> = new EventEmitter<any>();
 
   public email: string = '';
   public publishProgress: string = 'Pending';
@@ -45,6 +47,7 @@ export class AddPublicationComponent {
 
       if(this.progress.status === 'Finished') {
         this.publishProgress = this.progress.status;
+        this.refreshTimeLine.emit();
         keepWay.next(false);
       }
     });

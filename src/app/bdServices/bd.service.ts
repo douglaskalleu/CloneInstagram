@@ -21,17 +21,6 @@ export class Bd {
     }
 
     //TODO Melhor o retorno do email do usuario logado
-    public getPublish(): void{
-        firebase.auth().onAuthStateChanged((user) => {
-            this.fire.getPublish(user?.email!)
-            .then((publish: any) => {
-                this.publications = publish
-            });
-        });
-        
-    }
-
-    //TODO Melhor o retorno do email do usuario logado
     public getUserToPost(publish: PublishModel): void{
         firebase.auth().onAuthStateChanged((user) => {
             publish.email = user?.email!;

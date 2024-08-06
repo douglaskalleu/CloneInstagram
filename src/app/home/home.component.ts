@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Auth } from '../auth.service';
 import { ThemeService } from '../toggle-theme/theme.service';
 @Component({
@@ -7,6 +7,8 @@ import { ThemeService } from '../toggle-theme/theme.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  @ViewChild('publication') public publication: any
   constructor(private auth: Auth, private themeService: ThemeService) {}
 
   public logoff(): void{
@@ -17,4 +19,7 @@ export class HomeComponent {
 		return this.themeService.isDarkTheme;
 	}
 
+  public refreshTimeLine(): void{
+    this.publication.getPublish();
+  }
 }

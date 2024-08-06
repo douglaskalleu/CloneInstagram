@@ -2,17 +2,45 @@
     [ngClass]="{'bg-dark': isDarkMode, 'bg-light': !isDarkMode}"
 >
   <div class="container">
-    <div class="logo"></div>
-    <div >
-      <div class="add-post" data-bs-toggle="modal" data-bs-target="#exampleModal"></div>
-      <a href="#" (click)="logoff()" style="margin-left: 25px;">Sair</a>
-    </div>
+      <div
+        class="logo"
+        *ngIf="isDarkMode else lightModeLogo"
+        style="background-image: url('../../assets/logo-instagram-dark.png')"></div>
+
+      <ng-template #lightModeLogo>
+        <div class="logo" 
+        style="background-image: url('../../assets/logo-instagram-2.png')"></div>
+      </ng-template>
+      
+      <div *ngIf="isDarkMode; else lightMode">
+        <div
+          class="add-post"  
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          style="background-image: url('../../assets/camera-dark.png');"
+        >
+        </div>
+        <a href="#" (click)="logoff()" style="margin-left: 25px;">Sair</a>
+      </div>
+
+    <ng-template #lightMode>
+      <div >
+        <div
+          class="add-post"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          style="background-image: url('../../assets/camera.png');"
+        >
+        </div>
+        <a href="#" (click)="logoff()" style="margin-left: 25px;">Sair</a>
+      </div>
+    </ng-template>
   </div>
   <app-toggle-theme></app-toggle-theme>
 </nav>
 
 <br /><br /><br />
 <div class="container">
-  <app-publication></app-publication>
-  <app-add-publication></app-add-publication>  
+  <app-publication #publication></app-publication>
+  <app-add-publication (refreshTimeLine)="refreshTimeLine()"></app-add-publication>  
 </div>

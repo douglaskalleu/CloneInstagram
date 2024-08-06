@@ -3,6 +3,7 @@
 /* body{
     background: #FAFAFA;
 } */
+
 :root {
     --nsg-jumbotron-bg-color: var(--gray-100);
     [data-bs-theme="dark"] {
